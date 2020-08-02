@@ -1,12 +1,11 @@
-# Team_Web_3_Backend
-## TUNA
+# 🐟 TUNA: 뮤지션과 유저 만남의 주선 매칭서비스
+![TUNA](tuna_poster.jpg)
 
-* SpringBoot 2  
+### 개발 환경
 * Java 8  
-* Gradle   
-  
-  
-<br>
-
+* SpringBoot 2  
+* Mysql
 * Spring Data JPA  
 * Spring Security
+* Gradle   
+* AWS
