@@ -18,9 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MusicianRepository{
     private final EntityManager em;
-    
-
-
     /**
      * 뮤지션 값 저장
      * @param musician
@@ -118,26 +115,6 @@ public class MusicianRepository{
         return musicians;
     }
     /**
-     * 검색 페이지 - 메인
-     */
-    /*public List<Musician> findMusicianByAllSearch(String categoryNM){
-
-        List<Musician> musicians;
-        try{
-           if(categoryNM != "전체") {
-               musicians = em.createQuery("select m from Musician m order by m.createdDate asc " , Musician.class)
-                       .setFirstResult(0)
-                       .setMaxResults(9)
-                       .getResultList();
-            }
-        }
-        catch (NoResultException e){
-            log.error("MusicianRepository findMusicianByNew :"+e.getMessage());
-            musicians = null;
-        }
-        return musicians;
-    }*/
-    /**
      * 검색페이지 카테고리 메인
      */
    public List<Musician> findMusicianBySearch(String categoryNM){
@@ -161,7 +138,6 @@ public class MusicianRepository{
                          musicians = em.createQuery("select m from Musician m where m.id = :musicianId")
                                  .setParameter("musicianId", musicianId)
                                  .getResultList();
-
                  }
             }
         }
@@ -181,7 +157,6 @@ public class MusicianRepository{
         }catch (NoResultException e){
             log.error("MusicianRepository upBookmarkCount" + e.getMessage());
         }
-
     }
 
     public void downBookmarkCount(Long musicianId){

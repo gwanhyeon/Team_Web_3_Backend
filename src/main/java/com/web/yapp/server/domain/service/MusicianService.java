@@ -2,7 +2,6 @@ package com.web.yapp.server.domain.service;
 
 
 import com.web.yapp.server.controller.dto.*;
-//import com.web.yapp.server.controller.dto.SessionUserDto;
 import com.web.yapp.server.domain.*;
 import com.web.yapp.server.domain.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -269,7 +268,6 @@ public class MusicianService {
         }
     }
 
-
     /**
      * 뮤지션 전체 조회
      * @return
@@ -290,7 +288,6 @@ public class MusicianService {
     public MusicianDto findByIdMusician(Long id){
         return new MusicianDto(musicianRepository.findOne(id));
     }
-
 
     /**
      * 뮤지션 닉네임 조회

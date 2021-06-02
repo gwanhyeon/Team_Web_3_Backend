@@ -67,10 +67,6 @@ public class SongService {
     public List<Long> songSave(List<MultipartFile> multipartFiles, Long musicianId) throws IOException {
         List<Long> idList = new LinkedList<Long>();
         Musician musician = musicianRepository.findOne(musicianId);
-
-
-
-
         String RPcoverUrl = s3Uploader.upload(multipartFiles.get(1),"static");
         String RPsongUrl = s3Uploader.upload(multipartFiles.get(2),"static");
         String RPtitle = multipartFiles.get(2).getOriginalFilename();
@@ -100,40 +96,4 @@ public class SongService {
         }
         return idList;
     }
-
-
-   /* @Transactional //대표곡커버, 대표곡, 일반곡1, ... 순서
-    public List<Long> songSave(List<MultipartFile> multipartFiles, Long musicianId) throws IOException {
-        List<Long> idList = new LinkedList<Long>();
-        Musician musician = musicianRepository.findOne(musicianId);
-        String RPcoverUrl = s3Uploader.upload(multipartFiles.get(0),"static");
-        String RPsongUrl = s3Uploader.upload(multipartFiles.get(1),"static");
-        String RPtitle = multipartFiles.get(1).getOriginalFilename();
-
-        Song RPsong = Song.builder()
-                .title(RPtitle)
-                .coverUrl(RPcoverUrl)
-                .songUrl(RPsongUrl)
-                .represent(1)
-                .musician(musician)
-                .build();
-
-        songRepository.save(RPsong);
-        idList.add(RPsong.getId());
-
-        for(int i=2;i<multipartFiles.size();i++){
-            String title = multipartFiles.get(i).getOriginalFilename();
-            String songUrl = s3Uploader.upload(multipartFiles.get(i),"static");
-            Song song = new Song();
-            song.builder()
-                    .title(title)
-                    .songUrl(songUrl)
-                    .coverUrl("")
-                    .represent(0)
-                    .musician(musician)
-                    .build();
-        }
-        return idList;
-    }*/
-
 }

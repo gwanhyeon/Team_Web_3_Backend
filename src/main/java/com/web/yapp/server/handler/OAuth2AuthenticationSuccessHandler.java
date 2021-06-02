@@ -14,9 +14,8 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Component
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-    private final CustomOAuth2UserService customOAuth2UserService;
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        response.sendRedirect("http://localhost:3000?token=");
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+        response.sendRedirect(request.getRequestURI() + "?token=");
     }
 }

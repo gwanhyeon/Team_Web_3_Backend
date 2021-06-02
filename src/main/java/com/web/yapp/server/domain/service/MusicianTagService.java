@@ -1,8 +1,4 @@
 package com.web.yapp.server.domain.service;
-
-import com.web.yapp.server.controller.dto.MusicianDto;
-import com.web.yapp.server.controller.dto.MusicianSearchResponseDto;
-import com.web.yapp.server.controller.dto.SongDto;
 import com.web.yapp.server.controller.dto.TagDto;
 import com.web.yapp.server.domain.Musician;
 import com.web.yapp.server.domain.MusicianTag;
@@ -64,9 +60,6 @@ public class MusicianTagService {
         }
     }
 
-
-
-
     /**
      * 대표태그 조회
      * @param musicianId
@@ -113,52 +106,35 @@ public class MusicianTagService {
             List<Musician> musicians = musicianTagRepository.findMusicianByTag(tagId);
             if(musicians == null) break; //더 찾을 필요가 없음
 
-            for (Musician musician: musicians
-                 ) {
-                if(result.contains(musician)) {
-
-                }
-            }
-
-            for (Musician musician : musicians
-            ) {
+            for (Musician musician : musicians) {
                 System.out.println(tagNM +", musicianId " + musician.getId() +"tagId :"+tag.getId());
                 int value = map.containsKey(musician) ? map.get(musician)+1 : 1 ;
                 map.put(musician,value);
                 max = Math.max(value,max);
             }
-
         }
 
         Tag noSelectTag = tagRepository.findTagByTagNM("선택안함");
         Long noSelectTagId = noSelectTag.getId();
-        List<Musician> noSelectMuisicians
-                = musicianTagRepository.findNoOptionMusicianByTag(noSelectTagId, categoryNM);
+        List<Musician> noSelectMuisicians = musicianTagRepository.findNoOptionMusicianByTag(noSelectTagId, categoryNM);
 
         //제한없음 태그를 가진 뮤지션도 모두 불러오기
         Tag noLimitTag = tagRepository.findTagByTagNM("제한없음");
         Long noLimitTagId = noLimitTag.getId();
-        List<Musician> noLimitMuisicians
-                = musicianTagRepository.findNoOptionMusicianByTag(noLimitTagId, categoryNM);
+        List<Musician> noLimitMuisicians = musicianTagRepository.findNoOptionMusicianByTag(noLimitTagId, categoryNM);
 
-        for (Musician musician : noSelectMuisicians //수정하기
-        ) {
+        for (Musician musician : noSelectMuisicians) {
             map.put(musician, 0);
         }
 
-        for (Musician musician : noLimitMuisicians
-        ) {
+        for (Musician musician : noLimitMuisicians) {
             map.put(musician, 0);
         }
-
-        //선택한 태그 모두가지고 있는 뮤지션과, 제한없음 또는 선택안함을 가진 뮤지션
-        //선택한 태그를 모두가지고 있는 뮤지션이면. 태그 개수로 조건걸기
-        for( Map.Entry<Musician, Integer> elem : map.entrySet() ){
+        for(Map.Entry<Musician, Integer> elem : map.entrySet()){
             if(elem.getValue() == max || elem.getValue() == 0){
                 result.add(elem.getKey()); //elem.getkey => musician
             }
         }
-
         return result;
     }
 

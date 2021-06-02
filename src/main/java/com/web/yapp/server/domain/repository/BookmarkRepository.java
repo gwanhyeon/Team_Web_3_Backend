@@ -28,7 +28,6 @@ public class BookmarkRepository {
         }
     }
 
-
     /**
      * id값으로 북마크 정보 조회
      * @param id
@@ -50,11 +49,6 @@ public class BookmarkRepository {
         }
 
     }
-
- /*   public Bookmark findOne(Long id){
-        Bookmark bookmark = em.find(Bookmark.class, id);
-        return bookmark;
-    }*/
 
     public int delete(Long userId, Long musicianId){
         try {
@@ -78,6 +72,5 @@ public class BookmarkRepository {
             log.error("BookmarkRepository chkBookmark :"+e.getMessage());
             return null;
         }
-
     }
 }

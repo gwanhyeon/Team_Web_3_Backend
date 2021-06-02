@@ -37,6 +37,5 @@ public class ContractRepository {
             System.out.println(e.getMessage());
             return null;
         }
-
     }
 }

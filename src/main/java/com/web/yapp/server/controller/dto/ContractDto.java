@@ -27,10 +27,7 @@ public class ContractDto {
     private int minFee;
     private int maxFee;
 
-    public ContractDto(Contract id) {
-
-
-    }
+    public ContractDto(Contract id) { }
 
     public Contract toEntity(Musician musician, User user, String status, List<String> documentUrl){
         //list의 원소가 비어있을 경우 고려해야함
@@ -67,18 +64,4 @@ public class ContractDto {
                 .docuUrl5(urlSetting[4])
                 .build();
     }
-
-//    public ContractRequestDto(Contract Entity){
-//        this.usage = Entity.getUsage();
-//        this.copyright = Entity.getCopyright();
-//        this.minTime = Entity.getMinTime();
-//        this.maxTime = Entity.getMaxTime();
-//        this.playTimeChangable = Entity.getPlayTimeChangable();
-//        this.minFee = Entity.getMinFee();
-//        this.maxFee = Entity.getMaxFee();
-//        this.startDate = Entity.getStartDate();
-//        this.dueDate = Entity.getDueDate();
-//        this.kakaoId = Entity.getKakaoId();
-//        this.phoneNumber = Entity.getPhoneNumber();
-//    }
 }

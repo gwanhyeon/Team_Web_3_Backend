@@ -22,5 +22,4 @@ public class ContractController {
     public void createContract(@RequestBody ContractSaveRequestDto contractSaveRequestDto) throws IOException {
         contractService.createContract(contractSaveRequestDto);
     }
-
 }

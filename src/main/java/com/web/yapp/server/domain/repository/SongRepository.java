@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -30,7 +29,6 @@ public class SongRepository {
             log.error("SongRepository findSongByMusician :"+e.getMessage());
             return null;
         }
-
     }
 
     /**

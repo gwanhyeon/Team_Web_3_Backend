@@ -1,7 +1,6 @@
 package com.web.yapp.server.domain.service;
 
 import com.web.yapp.server.controller.dto.BookmarkDto;
-import com.web.yapp.server.controller.dto.MusicianDto;
 import com.web.yapp.server.controller.dto.SessionUserDto;
 import com.web.yapp.server.domain.Bookmark;
 import com.web.yapp.server.domain.Musician;
@@ -80,7 +79,6 @@ public class BookmarkService {
     public void downBookmarkCount(Musician musician){
         musicianRepository.downBookmarkCount(musician.getId());
     }
-
 
     /**
      * 유저 ID 조회

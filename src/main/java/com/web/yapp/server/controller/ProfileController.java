@@ -26,10 +26,6 @@ public class ProfileController {
     public HashMap<String,Object> userProfile (@RequestParam Long userId){
         HashMap<String,Object> resultMap = new HashMap<String,Object>();
 
-        /**
-         * 클라이언트 request: userId
-         */
-
         // 북마크 정보 조회
         BookmarkDto bookmarkList = bookmarkService.findByIdBookmark(userId);
         ContractDto contractList = contractService.findByIdContract(userId);
@@ -48,10 +44,6 @@ public class ProfileController {
     @GetMapping("/musicianProfile")
     public HashMap<String,Object> musicianProfile (@RequestParam Long musicianId){
         HashMap<String,Object> resultMap = new HashMap<String,Object>();
-
-        /**
-         * 클라이언트 request: musicianId
-         */
         bookmarkService.findByIdBookmark(musicianId);
         contractService.findByIdContract(musicianId);
         resultMap.put("success","1");

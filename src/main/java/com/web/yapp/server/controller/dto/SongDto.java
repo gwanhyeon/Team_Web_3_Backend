@@ -17,14 +17,6 @@ public class SongDto {
     private int represent;
     private MultipartFile multipartFile;
 
-//    @Builder
-//    public SongDto(String title, String coverUrl, String songUrl, int represent){
-//        this.title = title;
-//        this.coverUrl = coverUrl;
-//        this.songUrl = songUrl;
-//        this.represent = represent;
-//    }
-
     public Song toEntity(){
         return Song.builder()
                 .title(title)
@@ -39,7 +31,6 @@ public class SongDto {
         this.coverUrl = Entity.getCoverUrl();
         this.songUrl = Entity.getSongUrl();
         this.represent = Entity.getRepresent();
-
     }
 
 }

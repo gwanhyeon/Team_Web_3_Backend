@@ -27,5 +27,4 @@ public class Tag extends BaseTimeEntity{
         this.tagNM = tagNM;
         this.categoryNM = categoryNM;
     }
-
 }

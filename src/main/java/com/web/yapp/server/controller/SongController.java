@@ -14,15 +14,9 @@ public class SongController {
     private final SongService songService;
 
     /**
-     *
      * @param musicianId
      * @return
      */
-//    @GetMapping("/musician/{musicianId}") //뮤지션페이지에서 노래 목록 제공
-//    public List<SongDto> songsByMusician(@PathVariable Long musicianId){
-//        return songService.findSongByMusicianId(musicianId);
-//    }
-
     @GetMapping("/musician/{musicianId}") //뮤지션페이지에서 노래 목록 제공
     public Object songsByMusician(@PathVariable Long musicianId){
         Object object = songService.findSongByMusicianId(musicianId);
@@ -30,10 +24,4 @@ public class SongController {
         return object;
     }
 
-    //    @PutMapping
-//    public SongDto updateSong(){} //save
-//
-//    @DeleteMapping
-//    public SongDto deleteSong(){} //delete
-    
 }

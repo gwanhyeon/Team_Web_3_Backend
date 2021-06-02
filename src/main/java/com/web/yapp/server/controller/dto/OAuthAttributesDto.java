@@ -41,9 +41,6 @@ public class OAuthAttributesDto {
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }
-
-    //private static OAuthAttributesDto ofNaver(){}
-
     public User toEntity(){
         return User.builder()
                 .name(name)

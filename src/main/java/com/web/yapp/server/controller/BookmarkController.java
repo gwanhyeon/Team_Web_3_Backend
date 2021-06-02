@@ -32,6 +32,4 @@ public class BookmarkController {
         }else map.put("success","false");
         return map;
     }
-
-
 }
