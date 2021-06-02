@@ -27,12 +27,6 @@ public class BookmarkRepository {
             return new Bookmark();
         }
     }
-
-    /**
-     * id값으로 북마크 정보 조회
-     * @param id
-     * @return
-     */
     /**
      *
      * @param userId

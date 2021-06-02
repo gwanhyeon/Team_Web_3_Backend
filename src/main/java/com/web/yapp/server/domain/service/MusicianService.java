@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-@Transactional(readOnly = true)     /* 전체 서비스를 Readonly로 처리 단, 회원가입의 경우만 트랜잭션 처리 */
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MusicianService {
     private final MusicianRepository musicianRepository;
@@ -104,61 +104,7 @@ public class MusicianService {
      */
     public Map<String,Object> musicianCuration(CurationReqDto cuReqDto){
         HashMap<String,Object> ResponseMap = new HashMap<>();
-        HashMap<Musician,Integer> curationResult = new HashMap<>();
         List<MusicianCardResponseDto> musicianResponseDtos = new LinkedList<MusicianCardResponseDto>();
-//        List<Musician> atmoResult = new LinkedList<>();
-//        List<Musician> genreResult = new LinkedList<>();
-//        List<Musician> instruResult = new LinkedList<>();
-//        List<Musician> themeResult = new LinkedList<>();
-//        int max = 0;
-//
-//        atmoResult = musicianTagService.findMusicianByTags(cuReqDto.getAtmoList(),"분위기");
-//        for (Musician musician: atmoResult
-//        ) {
-//            int value = curationResult.containsKey(musician) ? curationResult.get(musician)+1 : 1 ;
-//            curationResult.put(musician,value);
-//            max = Math.max(max,value);
-//        }
-//        genreResult = musicianTagService.findMusicianByTags(cuReqDto.getGenreList(),"장르");
-//        for (Musician musician: genreResult
-//        ) {
-//            int value = curationResult.containsKey(musician) ? curationResult.get(musician)+1 : 1 ;
-//            curationResult.put(musician,value);
-//            max = Math.max(max,value);
-//        }
-//        instruResult = musicianTagService.findMusicianByTags(cuReqDto.getInstruList(),"악기");
-//        for (Musician musician: instruResult
-//        ) {
-//            int value = curationResult.containsKey(musician) ? curationResult.get(musician)+1 : 1 ;
-//            curationResult.put(musician,value);
-//            max = Math.max(max,value);
-//        }
-//        themeResult = musicianTagService.findMusicianByTags(cuReqDto.getThemeList(),  "테마");
-//        for (Musician musician: themeResult
-//        ) {
-//            int value = curationResult.containsKey(musician) ? curationResult.get(musician)+1 : 1 ;
-//            curationResult.put(musician,value);
-//            max = Math.max(max,value);
-//        }
-//        //4개의 조건이 모두 맞을때만 반환해야한다
-//
-//        System.out.println("============================max :"+max );
-//        //분위기, 장르, 악기, 테마의 조건을 모두 만족하는 뮤지션 고르기
-//        for( Map.Entry<Musician, Integer> elem : curationResult.entrySet() ){
-//            if(elem.getValue() == max){
-//                Musician musician = elem.getKey();
-//                System.out.println("musicianId"+ musician.getId());
-//
-//                MusicianCardResponseDto musicianCardRepDto = MusicianCardResponseDto
-//                        .builder()
-//                        .simpleMusicianResponseDto(getSimpleMusicianResponseDto(musician))
-//                        .bookmarkCount(musician.getBookmarkCount())
-//                        .alreadyBookmark(chkBookmark(musician))
-//                        .build();
-//                musicianResponseDtos.add(musicianCardRepDto);
-//            }
-//        }
-
 
         List<Musician> list = musicianRepository.findMusicianByNew();
         for (Musician musician:list
@@ -276,7 +222,6 @@ public class MusicianService {
         return musicianRepository.findAllMusician().stream()
                 .map(MusicianDto::new)
                 .collect(Collectors.toList());
-
     }
 
     /**

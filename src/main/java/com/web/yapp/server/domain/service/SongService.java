@@ -23,9 +23,8 @@ public class SongService {
     private final MusicianRepository musicianRepository;
     private final SongRepository songRepository;
     private final S3Uploader s3Uploader;
-
-    /** 뮤지션값 기준으로 노래 가져오기 => 뮤지션페이지에서 사용할듯?
-     *
+    /**
+     * 뮤지션값 기준으로 노래 가져오기
      * @param musicianId
      * @return
      */

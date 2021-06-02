@@ -31,8 +31,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
-
-        // 현재 로그인 진행 중인 서비스를 구분하는 코드. 이후 네이버 로그인 연동 시 네이버 로그인인지, 구글로그인인지 구분하기 위해 사용
         String userNameAttributeName = userRequest.
                 getClientRegistration().getProviderDetails()
                 .getUserInfoEndpoint().getUserNameAttributeName();
@@ -40,8 +38,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 oAuth2User.getAttributes());
         User user = saveOrupdate(attributes);
         /* 유저 테이블 저장 */
-        httpSession.setAttribute("user", new SessionUserDto(user)); //세션에 사용자 정보 저장
-        httpSession.setAttribute("accessToken", userRequest.getAccessToken().getTokenValue()); //세션에 사용자 정보 저장
+        httpSession.setAttribute("user", new SessionUserDto(user));
+        httpSession.setAttribute("accessToken", userRequest.getAccessToken().getTokenValue());
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
                 attributes.getAttributes(),

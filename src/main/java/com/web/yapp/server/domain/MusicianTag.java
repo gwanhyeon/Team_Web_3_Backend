@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "TUNA_MU_TAG_MAP")
 @Entity
 public class MusicianTag extends BaseTimeEntity{
-    //비식별 관계 받아온 식별자는 외래키로만 사용하고 새로운 식별자를 추가
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MU_TAG_MAP_ID")

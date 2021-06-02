@@ -25,7 +25,6 @@ public class MusicianTagService {
     private final MusicianRepository musicianRepository;
     private final MusicianTagRepository musicianTagRepository;
     private final TagRepository tagRepository;
-    private final SongService songService;
 
     /**
      * 태그등록
@@ -88,24 +87,20 @@ public class MusicianTagService {
         List<Musician> result = new LinkedList<>();
         int max = 0;
 
-        //분위기 일때는 map에 모두추가 그 기준으로 포함되어있는지 탐색하기
         for (int i=0;i<tagList.size();i++){
             String tagNM = tagList.get(i);
             log.info("MusicianTagService findMusicianByTags 태그명 : "+ tagList.get(i));
             if(tagNM.equals("선택안함") || tagNM.equals("제한없음") || tagNM.equals("")) {
                 result = musicianRepository.findMusicianByNew();
                 return result;
-            } //큐레이션에서 선택안함을 누르면 필터링 과정 필요 없이 다른 카테고리의 조건으로 넘어간다
-
+            }
             Tag tag = tagRepository.findTagByTagNM(tagNM);
             if (tag == null) break;
 
             Long tagId = tag.getId();
-
-            //해당 태그 1개를 가진 뮤지션 리스트
             List<Musician> musicians = musicianTagRepository.findMusicianByTag(tagId);
-            if(musicians == null) break; //더 찾을 필요가 없음
 
+            if(musicians == null) break;
             for (Musician musician : musicians) {
                 System.out.println(tagNM +", musicianId " + musician.getId() +"tagId :"+tag.getId());
                 int value = map.containsKey(musician) ? map.get(musician)+1 : 1 ;
@@ -118,7 +113,6 @@ public class MusicianTagService {
         Long noSelectTagId = noSelectTag.getId();
         List<Musician> noSelectMuisicians = musicianTagRepository.findNoOptionMusicianByTag(noSelectTagId, categoryNM);
 
-        //제한없음 태그를 가진 뮤지션도 모두 불러오기
         Tag noLimitTag = tagRepository.findTagByTagNM("제한없음");
         Long noLimitTagId = noLimitTag.getId();
         List<Musician> noLimitMuisicians = musicianTagRepository.findNoOptionMusicianByTag(noLimitTagId, categoryNM);
@@ -132,7 +126,7 @@ public class MusicianTagService {
         }
         for(Map.Entry<Musician, Integer> elem : map.entrySet()){
             if(elem.getValue() == max || elem.getValue() == 0){
-                result.add(elem.getKey()); //elem.getkey => musician
+                result.add(elem.getKey());
             }
         }
         return result;
@@ -163,14 +157,13 @@ public class MusicianTagService {
         List<TagDto> tags = musicianTagRepository.findTagByMusician(musicianId).stream()
                 .map(TagDto::new)
                 .collect(Collectors.toList());
-        Map<String,Object> map = new HashMap<String, Object>();
-        List<String> themeList = new LinkedList<String>();
-        List<String> genreList = new LinkedList<String>();
-        List<String> atmoList = new LinkedList<String>();
-        List<String> instruList = new LinkedList<String>();
+        Map<String,Object> map = new HashMap<>();
+        List<String> themeList = new LinkedList<>();
+        List<String> genreList = new LinkedList<>();
+        List<String> atmoList = new LinkedList<>();
+        List<String> instruList = new LinkedList<>();
 
-        for (TagDto t:tags
-        ) {
+        for (TagDto t:tags) {
             switch (t.getCategoryNM()){
                 case "테마":
                     themeList.add(t.getTagNM());

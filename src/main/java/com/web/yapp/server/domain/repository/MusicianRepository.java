@@ -26,8 +26,7 @@ public class MusicianRepository{
         try{
             EntityManager em = this.em;
             em.persist(musician);
-        }
-        catch (Exception e){
+        } catch (Exception e){
             log.error("musician 등록 실패");
         }
     }
@@ -58,8 +57,6 @@ public class MusicianRepository{
                 .setParameter("userNm", userNm)
                 .getSingleResult();
     }
-
-
     /**
      * 모든값 조회
      * @return
@@ -82,6 +79,7 @@ public class MusicianRepository{
 
     /**
      * 새로 등장한 뮤지션
+     * @return
      */
     public List<Musician> findMusicianByBookmark(){
         List<Musician> musicianChoiceInfo;
@@ -100,22 +98,24 @@ public class MusicianRepository{
 
     /**
      * 리스너들의 선택
+     * @return
      */
     public List<Musician> findMusicianByNew(){
         List<Musician> musicians;
         try{
             musicians = em.createQuery("select m from Musician m order by m.createdDate asc " , Musician.class)
                     .getResultList();
-
-        }
-        catch (NoResultException e){
+        } catch (NoResultException e){
             log.error("MusicianRepository findMusicianByNew :"+e.getMessage());
             musicians = null;
         }
         return musicians;
     }
+
     /**
      * 검색페이지 카테고리 메인
+     * @param categoryNM
+     * @return
      */
    public List<Musician> findMusicianBySearch(String categoryNM){
 
@@ -127,7 +127,6 @@ public class MusicianRepository{
             musicianIdList = em.createQuery("select t.musician.id from MusicianTag t where t.categoryNM = :categoryNM")
                     .setParameter("categoryNM", categoryNM)
                     .getResultList();
-
             if(categoryNM.equals("선택안함")){
                 musicians = em.createQuery("select m from Musician m order by m.createdDate asc ")
                         .getResultList();
@@ -153,7 +152,6 @@ public class MusicianRepository{
             Musician musician = findOne(musicianId);
             em.createQuery("update Musician m set m.bookmarkCount = m.bookmarkCount+1 where m.id = :musicianId")
                     .setParameter("musicianId",musicianId);
-
         }catch (NoResultException e){
             log.error("MusicianRepository upBookmarkCount" + e.getMessage());
         }

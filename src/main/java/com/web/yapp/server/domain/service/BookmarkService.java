@@ -71,7 +71,6 @@ public class BookmarkService {
     }
     @Transactional
     public void upBookmarkCount(Musician musician){
-        //MusicianDto = musician;
         musicianRepository.upBookmarkCount(musician.getId());
     }
 

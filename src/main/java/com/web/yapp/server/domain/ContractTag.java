@@ -23,7 +23,6 @@ public class ContractTag extends BaseTimeEntity{
     @JoinColumn(name = "TAG_ID")
     private Tag tag;
 
-    // "Y" or "N"
     @Column(name = "CON_TAG_MAP_RPRSN")
     private String represent;
 
